@@ -105,6 +105,7 @@
     "@kilocode/plugin-atomic-chat": "workspace:*",
     "@kilocode/sandbox": "workspace:*",
     "@kilocode/sdk": "workspace:*",
+    "@kilocode/tree-sitter-bash-git": "github:kristianrusnak/tree-sitter-bash#7c0cf8e9ba19ddbeacaa2f7058fe1ce28e41b278",
     "@lydell/node-pty": "catalog:",
     "@modelcontextprotocol/sdk": "1.29.0",
     "@npmcli/arborist": "9.4.0",

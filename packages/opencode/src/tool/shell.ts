@@ -22,6 +22,7 @@ import { normalizeUrls } from "@/kilocode/util/url" // kilocode_change
 import { CommandTimeout } from "@/kilocode/command-timeout" // kilocode_change
 import { heredocs } from "@/kilocode/tool/shell-heredoc" // kilocode_change
 import { unparsed } from "@/kilocode/tool/shell-unparsed" // kilocode_change
+import { normalizeCommand } from "@/kilocode/permission/git-normalize" // kilocode_change
 import { ChildProcess } from "effect/unstable/process"
 import { ChildProcessSpawner } from "effect/unstable/process/ChildProcessSpawner"
 import { ShellPrompt, type Parameters } from "./shell/prompt"
@@ -404,7 +405,9 @@ export const ShellPermission = Effect.gen(function* () {
       }
 
       if (tokens.length && (!cmd || !CWD.has(cmd))) {
-        scan.patterns.add(source(node))
+        scan.patterns.add(
+          yield* Effect.promise(() => normalizeCommand(source(node))), // kilocode_change
+        )
         scan.always.add(BashArity.prefix(tokens).join(" ") + " *")
       }
     }
